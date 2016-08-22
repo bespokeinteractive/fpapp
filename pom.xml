@@ -39,7 +39,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-
 			<!--
 			Libraries to add as dependencies with compile or runtime scope:
 			Find matching dependencies in the maven central repository.
@@ -56,6 +55,12 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>uiframework-api</artifactId>
 				<version>3.3.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>hospitalcore-api</artifactId>
+				<version>1.5.3</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>

@@ -20,7 +20,6 @@
     });
 </script>
 
-
 <style>
 .toast-item {
     background-color: #222;
