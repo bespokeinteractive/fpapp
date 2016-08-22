@@ -3,7 +3,9 @@ package org.openmrs.module.fpapp;
 import static org.openmrs.module.metadatadeploy.bundle.CoreConstructors.encounterType;
 
 import org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FamilyPlanningMetadata extends AbstractMetadataBundle {
 
 	public static final class _FamilyPlanningEncounterType {
