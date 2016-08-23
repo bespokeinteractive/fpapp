@@ -1,6 +1,6 @@
 <fieldset>
     <legend>Counselling</legend>
-    <label for="investigation" class="label title-label" style="width: auto;">Counselling Information<span class="important"></span></label>
+    <label class="label title-label" style="width: auto;">Counselling Information<span class="important"></span></label>
 
     <field>
         <input type="hidden" id="misc-info-set" class=""/>

@@ -315,7 +315,7 @@ form input[type="checkbox"], .form input[type="checkbox"] {
             <section style="width:60%">
                 <span class="title">FP Services</span>
                 ${ui.includeFragment("fpapp","counselling")}
-
+                ${ui.includeFragment("fpapp","cancerScreening")}
             </section>
         </form>
 
