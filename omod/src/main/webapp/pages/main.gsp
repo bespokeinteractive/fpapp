@@ -1,16 +1,17 @@
 <%
     ui.decorateWith("appui", "standardEmrPage", [title: "Family Planning"])
-    ui.includeJavascript("billingui", "moment.js")
-    ui.includeJavascript("mchapp", "object-to-query-string.js")
-    ui.includeJavascript("mchapp", "drugOrder.js")
-    ui.includeJavascript("mchapp", "includes-polyfill.js")
-    ui.includeCss("registration", "onepcssgrid.css")
+    ui.includeJavascript("uicommons", "handlebars/handlebars.min.js", Integer.MAX_VALUE - 1)
     ui.includeJavascript("uicommons", "navigator/validators.js", Integer.MAX_VALUE - 19)
     ui.includeJavascript("uicommons", "navigator/navigator.js", Integer.MAX_VALUE - 20)
     ui.includeJavascript("uicommons", "navigator/navigatorHandlers.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/navigatorModels.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/navigatorTemplates.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/exitHandlers.js", Integer.MAX_VALUE - 22)
+    ui.includeJavascript("billingui", "moment.js")
+    ui.includeJavascript("mchapp", "object-to-query-string.js")
+    ui.includeJavascript("mchapp", "drugOrder.js")
+    ui.includeJavascript("mchapp", "includes-polyfill.js")
+    ui.includeCss("registration", "onepcssgrid.css")
 %>
 
 <script>
@@ -315,6 +316,10 @@ form input[type="checkbox"], .form input[type="checkbox"] {
                 <span class="title">FP Services</span>
                 ${ui.includeFragment("fpapp","counselling")}
                 ${ui.includeFragment("fpapp","cancerScreening")}
+                <fieldset class="no-confirmation">
+                    <legend>FP Administration</legend>
+                    ${ui.includeFragment("fpapp", "familyPlanning")}
+                </fieldset>
             </section>
         </form>
 
