@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -22,34 +22,26 @@
 			<artifactId>library-name</artifactId> 
 		</dependency> 
 		-->
-
+		
 		<!-- Begin OpenMRS modules -->
-
+		
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>${project.parent.artifactId}-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-
+		
+				
 		<dependency>
+
 			<groupId>org.openmrs.module</groupId>
+						
 			<artifactId>uiframework-api</artifactId>
+												
 		</dependency>
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>hospitalcore-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>hospitalcore-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>metadatadeploy-api</artifactId>
-		</dependency>
-
+						
 		<!-- End OpenMRS modules -->
-
+		
 
 		<!-- Begin OpenMRS core -->
 
@@ -64,7 +56,7 @@
 			<artifactId>openmrs-web</artifactId>
 			<type>jar</type>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.openmrs.api</groupId>
 			<artifactId>openmrs-api</artifactId>
@@ -85,17 +77,9 @@
 			<type>pom</type>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- End OpenMRS core -->
 
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>mchapp-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>appui-omod</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
