@@ -238,6 +238,15 @@ form input[type="checkbox"], .form input[type="checkbox"] {
     margin: -1px;
     padding: 2px 15px;
 }
+.append-to-value {
+    color: #999;
+    float: right;
+    left: auto;
+    margin-left: -200px;
+    margin-top: 13px;
+    padding-right: 55px;
+    position: relative;
+}
 
 </style>
 
@@ -305,9 +314,13 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
 <div class="fp-tabs" style="margin-top:5px!important;">
     <ul>
+        <li id="ti"><a href="#triage-info">Triage</a></li>
         <li id="cn"><a href="#fp-services">FP Services</a></li>
-        <li id="ti"><a href="#triage-info">Triage Information</a></li>
     </ul>
+
+    <div id="triage-info">
+        ${ui.includeFragment("fpapp","triageDetails")}
+    </div>
 
     <div id="fp-services">
 
@@ -346,8 +359,4 @@ form input[type="checkbox"], .form input[type="checkbox"] {
         </form>
 
     </div>
-
-    <div id="triage-info">
-    </div>
-
 </div>
