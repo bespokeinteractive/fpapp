@@ -1,5 +1,10 @@
 <%
     ui.decorateWith("appui", "standardEmrPage", [title: "Family Planning"])
+    ui.includeJavascript("billingui", "moment.js")
+    ui.includeJavascript("mchapp", "object-to-query-string.js")
+    ui.includeJavascript("mchapp", "drugOrder.js")
+    ui.includeJavascript("mchapp", "includes-polyfill.js")
+    ui.includeCss("registration", "onepcssgrid.css")
     ui.includeJavascript("uicommons", "navigator/validators.js", Integer.MAX_VALUE - 19)
     ui.includeJavascript("uicommons", "navigator/navigator.js", Integer.MAX_VALUE - 20)
     ui.includeJavascript("uicommons", "navigator/navigatorHandlers.js", Integer.MAX_VALUE - 21)
@@ -168,29 +173,24 @@ form label,
     padding-left: 10px;
     width: 140px;
 }
-
 form input,
 form textarea,
 .form input,
 .form textarea {
     display: inline-block;
-    min-width: 70%;
+    min-width: 1%!important;
 }
-
 form select,
 form ul.select,
 .form select,
 .form ul.select {
     display: inline-block;
-    min-width: 73%;
+    min-width: 3%;
 }
-
-
 form input:focus, form select:focus, form textarea:focus, form ul.select:focus, .form input:focus, .form select:focus, .form textarea:focus, .form ul.select:focus {
     outline: 2px none #007fff;
     box-shadow: 0 0 1px 0 #ccc !important;
 }
-
 form input[type="checkbox"], .form input[type="checkbox"] {
     margin-top: 4px;
     cursor: pointer;
@@ -203,6 +203,42 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 .simple-form-ui section fieldset select:focus, .simple-form-ui section fieldset input:focus, .simple-form-ui section #confirmationQuestion select:focus, .simple-form-ui section #confirmationQuestion input:focus, .simple-form-ui #confirmation fieldset select:focus, .simple-form-ui #confirmation fieldset input:focus, .simple-form-ui #confirmation #confirmationQuestion select:focus, .simple-form-ui #confirmation #confirmationQuestion input:focus, .simple-form-ui form section fieldset select:focus, .simple-form-ui form section fieldset input:focus, .simple-form-ui form section #confirmationQuestion select:focus, .simple-form-ui form section #confirmationQuestion input:focus, .simple-form-ui form #confirmation fieldset select:focus, .simple-form-ui form #confirmation fieldset input:focus, .simple-form-ui form #confirmation #confirmationQuestion select:focus, .simple-form-ui form #confirmation #confirmationQuestion input:focus{
     outline: 1px none #f00
 }
+.floating-controls{
+    margin-top: 5px;
+    padding: 0 !important;
+}
+.floating-controls input{
+    cursor: pointer;
+    float: none!important;
+}
+.floating-controls label{
+    cursor: pointer;
+}
+.floating-controls span{
+    color: #f26522;
+}
+.floating-controls textarea{
+    resize: none;
+}
+.onerow {
+    clear: both;
+    padding: 0 10px;
+}
+.testbox {
+    background-color: rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    min-height: 130px;
+    margin: 0 0 15px 5px;
+    width: 100%;
+}
+.testbox div {
+    background: #5b57a6 none repeat scroll 0 0;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+    color: #fff;
+    margin: -1px;
+    padding: 2px 15px;
+}
+
 </style>
 
 
@@ -276,9 +312,10 @@ form input[type="checkbox"], .form input[type="checkbox"] {
     <div id="fp-services">
 
         <form id="familyPlanningForm" class="simple-form-ui">
-            <section>
+            <section style="width:60%">
                 <span class="title">FP Services</span>
-
+                ${ui.includeFragment("fpapp","counselling")}
+                ${ui.includeFragment("fpapp","cancerScreening")}
             </section>
         </form>
 
