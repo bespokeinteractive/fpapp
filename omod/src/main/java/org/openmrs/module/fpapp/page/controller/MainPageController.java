@@ -1,18 +1,31 @@
 package org.openmrs.module.fpapp.page.controller;
 
+import java.text.ParseException;
+import java.util.Date;
+
+import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.appui.UiSessionContext;
+import org.openmrs.module.fpapp.FamilyPlanningMetadata;
 import org.openmrs.module.hospitalcore.HospitalCoreService;
-import org.openmrs.module.hospitalcore.model.PatientSearch;
+import org.openmrs.module.hospitalcore.PatientQueueService;
+import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
+import org.openmrs.module.mchapp.api.MchService;
+import org.openmrs.module.mchapp.api.model.ClinicalForm;
+import org.openmrs.module.mchapp.api.parsers.QueueLogs;
+import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.page.PageModel;
+import org.openmrs.ui.framework.page.PageRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Date;
 
 /**
  * Created by franqq on 8/16/16.
  */
 public class MainPageController {
+    protected Logger log = LoggerFactory.getLogger(MainPageController.class);
     public void get(
             @RequestParam("patientId") Patient patient,
             @RequestParam("queueId") Integer queueId,
@@ -28,16 +41,30 @@ public class MainPageController {
         }
 
         HospitalCoreService hospitalCoreService = Context.getService(HospitalCoreService.class);
-        PatientSearch patientSearch = hospitalCoreService.getPatientByPatientId(patient.getPatientId());
 
-        String patientType = hospitalCoreService.getPatientType(patient);
-
-        model.addAttribute("patientType", patientType);
-        model.addAttribute("patientSearch", patientSearch);
         model.addAttribute("previousVisit", hospitalCoreService.getLastVisitTime(patient));
         model.addAttribute("patientCategory", patient.getAttribute(14));
 
-        model.addAttribute("patientId", patient.getPatientId());
         model.addAttribute("date", new Date());
+    }
+
+    public String post(
+            @RequestParam("patientId") Patient patient, 
+            @RequestParam("queueId") Integer queueId, 
+            PageRequest request, 
+            UiSessionContext session, 
+            UiUtils ui) {
+        try {
+            OpdPatientQueue patientQueue = Context.getService(PatientQueueService.class).getOpdPatientQueueById(queueId);
+            ClinicalForm form = ClinicalForm.generateForm(request.getRequest(), patient, null);
+            //Set this based on count of previous FP encounters
+            String encounterType = FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE;
+            Encounter encounter = Context.getService(MchService.class).saveMchEncounter(form, encounterType, session.getSessionLocation());
+            QueueLogs.logOpdPatient(patientQueue, encounter);
+        } catch (ParseException e) {
+            log.error(e.getMessage());
+            return null;
+        }
+        return "redirect:" + ui.pageLinkWithoutContextPath("patientqueueapp", "mchClinicQueue", null);
     }
 }

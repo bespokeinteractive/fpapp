@@ -1,16 +1,17 @@
 <%
     ui.decorateWith("appui", "standardEmrPage", [title: "Family Planning"])
-    ui.includeJavascript("billingui", "moment.js")
-    ui.includeJavascript("mchapp", "object-to-query-string.js")
-    ui.includeJavascript("mchapp", "drugOrder.js")
-    ui.includeJavascript("mchapp", "includes-polyfill.js")
-    ui.includeCss("registration", "onepcssgrid.css")
+    ui.includeJavascript("uicommons", "handlebars/handlebars.min.js", Integer.MAX_VALUE - 1)
     ui.includeJavascript("uicommons", "navigator/validators.js", Integer.MAX_VALUE - 19)
     ui.includeJavascript("uicommons", "navigator/navigator.js", Integer.MAX_VALUE - 20)
     ui.includeJavascript("uicommons", "navigator/navigatorHandlers.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/navigatorModels.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/navigatorTemplates.js", Integer.MAX_VALUE - 21)
     ui.includeJavascript("uicommons", "navigator/exitHandlers.js", Integer.MAX_VALUE - 22)
+    ui.includeJavascript("billingui", "moment.js")
+    ui.includeJavascript("mchapp", "object-to-query-string.js")
+    ui.includeJavascript("mchapp", "drugOrder.js")
+    ui.includeJavascript("mchapp", "includes-polyfill.js")
+    ui.includeCss("registration", "onepcssgrid.css")
 %>
 
 <script>
@@ -19,7 +20,6 @@
         NavigatorController = new KeyboardController(jq('#familyPlanningForm'));
     });
 </script>
-
 
 <style>
 .toast-item {
@@ -311,12 +311,38 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
     <div id="fp-services">
 
-        <form id="familyPlanningForm" class="simple-form-ui">
+        <form method="post" id="familyPlanningForm" class="simple-form-ui">
+            <input type="hidden" value="${patient.id}" name="patientId" >
+            <input type="hidden" value="${queueId}" name="queueId" >
             <section style="width:60%">
                 <span class="title">FP Services</span>
-                ${ui.includeFragment("fpapp","counselling")}
-                ${ui.includeFragment("fpapp","cancerScreening")}
+                <fieldset class="no-confirmation">
+                    <legend>Counselling</legend>
+                    ${ui.includeFragment("fpapp","counselling")}
+                </fieldset>
+                <fieldset class="no-confirmation">
+                    <legend>Cervical Screening</legend>
+                    ${ui.includeFragment("fpapp","cancerScreening")}
+                </fieldset>
+                <fieldset class="no-confirmation">
+                    <legend>FP Administration</legend>
+                    ${ui.includeFragment("fpapp", "familyPlanning")}
+                </fieldset>
             </section>
+            <div id="confirmation">
+                <span id="confirmation_label" class="title">Confirmation</span>
+                <div class="before-dataCanvas"></div>
+                <div id="dataCanvas"></div>
+                <div class="after-data-canvas"></div>
+                <div id="confirmationQuestion">
+                    <p style="display: inline">
+                        <input id="submit" type="submit" class="submitButton confirm right" value="Submit" />
+                    </p>
+                    <p style="display: inline">
+                        <input id="cancelSubmission" class="cancel" type="button" value="Cancel" />
+                    </p>
+                </div>
+            </div>
         </form>
 
     </div>

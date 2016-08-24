@@ -31,7 +31,6 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>uiframework-api</artifactId>
@@ -39,6 +38,14 @@
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>hospitalcore-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>hospitalcore-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>metadatadeploy-api</artifactId>
 		</dependency>
 
 		<!-- End OpenMRS modules -->
@@ -81,6 +88,14 @@
 
 		<!-- End OpenMRS core -->
 
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mchapp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>appui-omod</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
