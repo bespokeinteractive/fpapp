@@ -311,16 +311,38 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
     <div id="fp-services">
 
-        <form id="familyPlanningForm" class="simple-form-ui">
+        <form method="post" id="familyPlanningForm" class="simple-form-ui">
+            <input type="hidden" value="${patient.id}" name="patientId" >
+            <input type="hidden" value="${queueId}" name="queueId" >
             <section style="width:60%">
                 <span class="title">FP Services</span>
-                ${ui.includeFragment("fpapp","counselling")}
-                ${ui.includeFragment("fpapp","cancerScreening")}
+                <fieldset class="no-confirmation">
+                    <legend>Counselling</legend>
+                    ${ui.includeFragment("fpapp","counselling")}
+                </fieldset>
+                <fieldset class="no-confirmation">
+                    <legend>Cervical Screening</legend>
+                    ${ui.includeFragment("fpapp","cancerScreening")}
+                </fieldset>
                 <fieldset class="no-confirmation">
                     <legend>FP Administration</legend>
                     ${ui.includeFragment("fpapp", "familyPlanning")}
                 </fieldset>
             </section>
+            <div id="confirmation">
+                <span id="confirmation_label" class="title">Confirmation</span>
+                <div class="before-dataCanvas"></div>
+                <div id="dataCanvas"></div>
+                <div class="after-data-canvas"></div>
+                <div id="confirmationQuestion">
+                    <p style="display: inline">
+                        <input id="submit" type="submit" class="submitButton confirm right" value="Submit" />
+                    </p>
+                    <p style="display: inline">
+                        <input id="cancelSubmission" class="cancel" type="button" value="Cancel" />
+                    </p>
+                </div>
+            </div>
         </form>
 
     </div>

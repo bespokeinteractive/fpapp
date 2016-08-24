@@ -8,7 +8,7 @@
     <input type="text" name="" id="quantity-given">
 </p>
 <p>
-    ${ui.includeFragment("uicommons", "field/datetimepicker", [id: 'fp-date', label: 'Date Given', formFieldName: 'obsDatetime', useTime: false, defaultToday: true])}
+    ${ui.includeFragment("uicommons", "field/datetimepicker", [id: 'fp-date', label: 'Date Given', formFieldName: 'obsDatetime', useTime: false, defaultToday: true, endToday: true])}
 </p>
 <p>
     <label>Comment</label>
