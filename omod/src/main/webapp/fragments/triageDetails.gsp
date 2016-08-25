@@ -10,7 +10,7 @@
 <script>
     jq(function(){
         jq("#fpTriageFormSubmitButton").on("click", function(){
-
+            jq("#fp-triage-form").submit();
         })
     });
 </script>
@@ -37,7 +37,7 @@
 
     <div style="min-width: 78%" class="col16 dashboard">
         <div class="info-section">
-            <form id="fp-triage-form" class="fp-triage-form">
+            <form method="post"  id="fp-triage-form" class="fp-triage-form">
                 <input type="hidden" value="" id="editStatus" name="isEdit"/>
                 <div class="profile-editor"></div>
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="info-body">
-                    <input type="hidden" name="patientId" value="${patientId}" >
+                    <input type="hidden" name="patientId" value="${patient.id}" >
                     <input type="hidden" name="queueId" value="${queueId}" >
                     <div>
                         <label for="concept.5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">Weight</label>
@@ -62,8 +62,8 @@
                         <span id="12483" class="field-error" style="display: none"></span>
                     </div>
                     <div>
-                        <label for="concept.respiratoryRateConcept">Respiratory Rate</label>
-                        <input type="text" id="concept.respiratoryRateConcept" name="concept.respiratoryRateConcept" class="number numeric-range"/>
+                        <label for="concept.dece7c79-d59d-41ed-a5b7-9bfbe7a3bc2f">Respiratory Rate</label>
+                        <input type="text" id="concept.dece7c79-d59d-41ed-a5b7-9bfbe7a3bc2f" name="concept.dece7c79-d59d-41ed-a5b7-9bfbe7a3bc2f" class="number numeric-range"/>
                         <span class="append-to-value">Bpm</span>
                         <span id="12486" class="field-error" style="display: none"></span>
                     </div>
