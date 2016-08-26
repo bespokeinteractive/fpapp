@@ -1,7 +1,25 @@
+<div>
+    Previously Administered Methods:
+    <% if (administeredMethods) { %>
+    <ul>
+    <% administeredMethods.each { %>
+        <li>${it.method} (${it.comment})</li>
+    <% } %>
+    </ul>
+    <% }
+       else { %>
+        None
+    <% } %>
+</div>
 <p>
     <label for="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FP Method</label>
     <input type="text" class="fp-method">
     <input type="hidden" name="concept.374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" class="fp-method-value" id="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
+</p>
+<p>
+    <label>Type (if applicable)</label>
+    <label for="insertion"><input id="insertion" type="radio" >Insertion</label>
+    <label for="removal"><input id="removal" type="radio" >Removal</label>
 </p>
 <p>
     <label for="quantity-given">Quantity</label>
