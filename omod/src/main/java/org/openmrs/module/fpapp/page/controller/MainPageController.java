@@ -46,6 +46,10 @@ public class MainPageController {
         model.addAttribute("patientCategory", patient.getAttribute(14));
 
         model.addAttribute("date", new Date());
+
+        MchService mchService = Context.getService(MchService.class);
+        boolean enrolledInPNC = mchService.enrolledInPNC(patient);
+        model.addAttribute("enrolledInPNC",enrolledInPNC);
     }
 
     public String post(

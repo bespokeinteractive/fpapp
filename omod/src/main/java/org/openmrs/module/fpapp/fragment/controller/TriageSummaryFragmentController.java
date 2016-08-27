@@ -3,8 +3,8 @@ package org.openmrs.module.fpapp.fragment.controller;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Patient;
+import org.openmrs.api.EncounterService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.hospitalcore.PatientDashboardService;
 import org.openmrs.module.mchapp.MchMetadata;
 import org.openmrs.module.mchapp.api.MchService;
 import org.openmrs.module.mchapp.model.TriageDetail;
@@ -15,8 +15,10 @@ import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.openmrs.ui.framework.page.PageModel;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +28,6 @@ public class TriageSummaryFragmentController {
     public void controller(FragmentConfiguration config,
                            FragmentModel model,
                            PageModel pageModel) {
-        PatientDashboardService dashboardService = Context.getService(PatientDashboardService.class);
 
         Patient patient = (Patient)pageModel.get("patient");
 
@@ -34,23 +35,22 @@ public class TriageSummaryFragmentController {
         EncounterType mchEncType = null;
 
         mchEncType = Context.getEncounterService().getEncounterTypeByUuid(MchMetadata._MchEncounterType.PNC_TRIAGE_ENCOUNTER_TYPE);
-
-
-        List<Encounter> encounters = dashboardService.getEncounter(patient, null, mchEncType, null);
+        Collection<EncounterType> encounterTypes = new ArrayList<EncounterType>();
+        encounterTypes.add(mchEncType);
+        EncounterService encounterService = Context.getEncounterService();
+        Calendar now = Calendar.getInstance();
+        now.set(Calendar.HOUR_OF_DAY,0);
+        Date fromDate = now.getTime();
+        Date toDate = new Date();
+        List<Encounter> encounters = encounterService.getEncounters(patient,null,fromDate,toDate,null,encounterTypes,null, null, null, false);
 
         List<TriageSummary> triageSummaries = new ArrayList<TriageSummary>();
 
-        int i=0;
-
-        for(Encounter enc : encounters){
+        for(Encounter encounter : encounters){
             TriageSummary triageSummary = new TriageSummary();
-            triageSummary.setVisitDate(enc.getDateCreated());
-            triageSummary.setEncounterId(enc.getEncounterId());
+            triageSummary.setVisitDate(encounter.getDateCreated());
+            triageSummary.setEncounterId(encounter.getEncounterId());
             triageSummaries.add(triageSummary);
-            i++;
-            if(i >=20){
-                break;
-            }
         }
         model.addAttribute("patient", patient);
         model.addAttribute("triageSummaries", triageSummaries);
