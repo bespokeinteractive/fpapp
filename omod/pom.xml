@@ -98,6 +98,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
+			<artifactId>mchapp-omod</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
 			<artifactId>appui-omod</artifactId>
 		</dependency>
 	</dependencies>

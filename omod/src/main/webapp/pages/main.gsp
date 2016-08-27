@@ -172,7 +172,7 @@ form label,
     display: inline-block;
     padding-left: 10px;
     width: 140px;
-}
+}triageDetails
 form input,
 form textarea,
 .form input,
@@ -193,7 +193,7 @@ form input:focus, form select:focus, form textarea:focus, form ul.select:focus, 
 }
 form input[type="checkbox"], .form input[type="checkbox"] {
     margin-top: 4px;
-    cursor: pointer;
+    cursor: pointer;triageDetails
 }
 #modal-overlay {
     background: #000 none repeat scroll 0 0;
@@ -210,7 +210,7 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 .floating-controls input{
     cursor: pointer;
     float: none!important;
-}
+}triageDetails
 .floating-controls label{
     cursor: pointer;
 }
@@ -288,7 +288,7 @@ form input[type="checkbox"], .form input[type="checkbox"] {
                 <span id="agename"></span>
             </span>
         </h1>
-
+triageDetails
         <br/>
 
         <div id="stacont" class="status-container">
@@ -314,9 +314,14 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
 <div class="fp-tabs" style="margin-top:5px!important;">
     <ul>
+        <li id="ts"><a href="#triage-summary">Triage Summary</a></li>
         <li id="ti"><a href="#triage-info">Triage</a></li>
         <li id="cn"><a href="#fp-services">FP Services</a></li>
+
     </ul>
+    <div id="triage-summary">
+        ${ui.includeFragment("fpapp","triageSummary")}
+    </div>
 
     <div id="triage-info">
         ${ui.includeFragment("fpapp","triageDetails")}
@@ -359,4 +364,5 @@ form input[type="checkbox"], .form input[type="checkbox"] {
         </form>
 
     </div>
+
 </div>
