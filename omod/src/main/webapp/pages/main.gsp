@@ -288,7 +288,6 @@ form input[type="checkbox"], .form input[type="checkbox"] {
                 <span id="agename"></span>
             </span>
         </h1>
-
         <br/>
 
         <div id="stacont" class="status-container">
@@ -314,13 +313,23 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
 <div class="fp-tabs" style="margin-top:5px!important;">
     <ul>
-        <li id="ti"><a href="#triage-info">Triage</a></li>
+        <% if(enrolledInPNC){ %>
+            <li id="ts"><a href="#triage-summary">Triage Summary</a></li>
+        <% } else {%>
+            <li id="ti"><a href="#triage-info">Triage</a></li>
+        <% } %>
         <li id="cn"><a href="#fp-services">FP Services</a></li>
     </ul>
 
-    <div id="triage-info">
-        ${ui.includeFragment("fpapp","triageDetails")}
-    </div>
+    <% if(enrolledInPNC){ %>
+        <div id="triage-summary">
+            ${ui.includeFragment("fpapp","triageSummary")}
+        </div>
+    <% } else {%>
+        <div id="triage-info">
+            ${ui.includeFragment("fpapp","triageDetails")}
+        </div>
+    <% } %>
 
     <div id="fp-services">
 
@@ -359,4 +368,5 @@ form input[type="checkbox"], .form input[type="checkbox"] {
         </form>
 
     </div>
+
 </div>
