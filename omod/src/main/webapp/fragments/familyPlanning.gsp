@@ -18,12 +18,12 @@
 </p>
 <p>
     <label>Type (if applicable)</label>
-    <label for="insertion"><input id="insertion" type="radio" >Insertion</label>
-    <label for="removal"><input id="removal" type="radio" >Removal</label>
+    <label for="insertion"><input id="insertion" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="66a52b2a-9323-4d39-a3e2-be9906f2d9cf" >Insertion</label>
+    <label for="removal"><input id="removal" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="3069f0b8-0f0a-4f0f-bcc5-dd6812fceca8" >Removal</label>
 </p>
 <p>
-    <label for="quantity-given">Quantity</label>
-    <input type="text" name="" id="quantity-given">
+    <label for="quantity-given">Quantity Issued</label>
+    <input type="text" name="concept.074c20bc-e18d-42f7-b501-a0bb549394c6" id="quantity-given">
 </p>
 <p>
     ${ui.includeFragment("uicommons", "field/datetimepicker", [id: 'fp-date', label: 'Date Given', formFieldName: 'obsDatetime', useTime: false, defaultToday: true, endToday: true])}
