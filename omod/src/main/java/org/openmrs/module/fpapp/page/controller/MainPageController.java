@@ -8,6 +8,7 @@ import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.fpapp.FamilyPlanningMetadata;
+import org.openmrs.module.fpapp.api.FamilyPlanningService;
 import org.openmrs.module.hospitalcore.HospitalCoreService;
 import org.openmrs.module.hospitalcore.PatientQueueService;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
@@ -62,7 +63,13 @@ public class MainPageController {
             OpdPatientQueue patientQueue = Context.getService(PatientQueueService.class).getOpdPatientQueueById(queueId);
             ClinicalForm form = ClinicalForm.generateForm(request.getRequest(), patient, null);
             //Set this based on count of previous FP encounters
-            String encounterType = FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE;
+            String encounterType = "";
+            if (Context.getService(FamilyPlanningService.class).getNumberOfVisits(patient) == 0) {
+                encounterType = FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE;
+            }
+            else {
+                encounterType = FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_REVISIT_ENCOUNTER_TYPE;
+            }
             Encounter encounter = Context.getService(MchService.class).saveMchEncounter(form, encounterType, session.getSessionLocation());
             QueueLogs.logOpdPatient(patientQueue, encounter);
         } catch (ParseException e) {
