@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.EncounterType;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
@@ -37,6 +39,24 @@ public class FamilyPlanningServiceImpl implements FamilyPlanningService {
             administeredMethods.add(new FamilyPlanningMethod(obs));
         }
         return administeredMethods;
+    }
+
+    @Override
+    public Integer getNumberOfVisits(Patient patient) {
+        EncounterType newFPEncounterType = Context.getEncounterService().getEncounterTypeByUuid(FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE);
+        EncounterType revisitFPEncounterType = Context.getEncounterService().getEncounterTypeByUuid(FamilyPlanningMetadata._FamilyPlanningEncounterType.FP_REVISIT_ENCOUNTER_TYPE);
+        List<Encounter> fpEncounters = Context.getEncounterService().getEncounters(
+                patient, //who
+                null, //loc
+                null, //fromDate
+                null, //toDate
+                null, //enteredViaForms
+                Arrays.asList(newFPEncounterType, revisitFPEncounterType), //encounterTypes
+                null, //providers
+                null, //visitTypes
+                null, //visits
+                false); //includeVoided
+        return fpEncounters.size();
     }
 
 }

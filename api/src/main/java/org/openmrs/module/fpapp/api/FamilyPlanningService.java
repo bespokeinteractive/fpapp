@@ -7,5 +7,6 @@ import org.openmrs.Patient;
 public interface FamilyPlanningService {
 
     Set<FamilyPlanningMethod> getPreviousMethods(Patient patient);
+    Integer getNumberOfVisits(Patient patient);
 
 }

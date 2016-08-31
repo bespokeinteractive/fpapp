@@ -19,4 +19,11 @@ public class FamilyPlanningServiceTest extends BaseModuleContextSensitiveTest {
         
         Assert.assertThat(administeredMethods, Matchers.hasSize(2));
     }
+
+    @Test public void getNumberOfVisits_shouldReturnCountOfAllFPForGivenPatient() throws Exception {
+        executeDataSet("fp-test-data.xml");
+        Patient patient = Context.getPatientService().getPatient(2);
+        
+        Assert.assertThat(Context.getService(FamilyPlanningService.class).getNumberOfVisits(patient), Matchers.is(3));
+    }
 }
