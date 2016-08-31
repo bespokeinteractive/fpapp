@@ -20,7 +20,7 @@ public class FamilyPlanningMetadata extends AbstractMetadataBundle {
     @Override
     public void install() throws Exception {
         install(encounterType("FP New", "FP New Visit", _FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE));
-        install(encounterType("FP Revisit", "FP Revisit", _FamilyPlanningEncounterType.FP_NEW_ENCOUNTER_TYPE));
+        install(encounterType("FP Revisit", "FP Revisit", _FamilyPlanningEncounterType.FP_REVISIT_ENCOUNTER_TYPE));
     }
 
 }
