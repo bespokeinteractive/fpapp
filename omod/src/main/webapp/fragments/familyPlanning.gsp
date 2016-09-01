@@ -19,6 +19,7 @@
 <p>
     <label>Type (if applicable)</label>
     <label for="insertion"><input id="insertion" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="66a52b2a-9323-4d39-a3e2-be9906f2d9cf" >Insertion</label>
+    <label for="insertion"><input id="insertion" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="159489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" >Follow-up</label>
     <label for="removal"><input id="removal" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="3069f0b8-0f0a-4f0f-bcc5-dd6812fceca8" >Removal</label>
 </p>
 <p>
