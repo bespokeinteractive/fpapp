@@ -18,9 +18,7 @@
             }).error(function(data){
                 console.info("Error");
             });
-        });
-
-      
+        });      
 
         var triageSummaries = jq(".triage-summary");
 
@@ -33,41 +31,41 @@
     });
 </script>
 <style>
-#triage-left-menu {
-    border-top: medium none #fff;
-    border-right: 	medium none #fff;
-}
-#triage-left-menu li:nth-child(1) {
-    border-top: 	1px solid #ccc;
-}
-#triage-left-menu li:last-child {
-    border-bottom:	1px solid #ccc;
-    border-right:	1px solid #ccc;
-}
-.triage-summary{
+	#triage-left-menu {
+		border-top: medium none #fff;
+		border-right: 	medium none #fff;
+	}
+	#triage-left-menu li:nth-child(1) {
+		border-top: 	1px solid #ccc;
+	}
+	#triage-left-menu li:last-child {
+		border-bottom:	1px solid #ccc;
+		border-right:	1px solid #ccc;
+	}
+	.triage-summary{
 
-}
-#triage-person-detail {
-    display: none;
-}
-.dashboard .info-body label {
-    display: inline-block;
-    font-size: 90%;
-    font-weight: bold;
-    margin-bottom: 5px;
-    width: 190px;
-}
-.triage-info-history label{
-    float: left;
-}
-.triage-info-history span{
-    float: 	left;
-    display: inline-block;
-}
-.status.active {
-    margin-right: 10px;
-    margin-top: 7px;
-}
+	}
+	#triage-person-detail {
+		display: none;
+	}
+	.triageSummaryPrintDiv.dashboard .info-body label {
+		display: inline-block;
+		font-size: 90%;
+		font-weight: bold;
+		margin-bottom: 5px;
+		width: 190px;
+	}
+	.triage-info-history label{
+		float: left;
+	}
+	.triage-info-history span{
+		float: 	left;
+		display: inline-block;
+	}
+	.status.active {
+		margin-right: 10px;
+		margin-top: 7px;
+	}
 </style>
 <div class="onerow">
     <div id="triage-left-menu" style="padding-top: 15px;" class="col15 clear">
