@@ -313,42 +313,44 @@ form input[type="checkbox"], .form input[type="checkbox"] {
 
 <div class="fp-tabs" style="margin-top:5px!important;">
     <ul>
-        <li id="cn"><a href="#fp-services">FP Notes</a></li>
-        <li id="cn"><a href="#triage-info">Triage Information</a></li>
-        <li id="cn"><a href="#fp-history">FP History</a></li>        
-    </ul>    
+        <% if(enrolledInPNC){ %>
+            <li id="ts"><a href="#triage-summary">Triage Summary</a></li>
+        <% } else {%>
+            <li id="ti"><a href="#triage-info">Triage</a></li>
+        <% } %>
+        <li id="cn"><a href="#fp-services">FP Services</a></li>
+    </ul>
+
+    <% if(enrolledInPNC){ %>
+        <div id="triage-summary">
+            ${ui.includeFragment("fpapp","triageSummary")}
+        </div>
+    <% } else {%>
+        <div id="triage-info">
+            ${ui.includeFragment("fpapp","triageDetails")}
+        </div>
+    <% } %>
 
     <div id="fp-services">
+
         <form method="post" id="familyPlanningForm" class="simple-form-ui">
-            <input type="hidden" value="${patient.id}" name="patientId" />
-            <input type="hidden" value="${queueId}" name="queueId" />			
-			
+            <input type="hidden" value="${patient.id}" name="patientId" >
+            <input type="hidden" value="${queueId}" name="queueId" >
             <section style="width:60%">
                 <span class="title">FP Services</span>
-				
-				<% if(!enrolledInPNC){ %>
-					<fieldset class="no-confirmation">
-						<legend>Triage Details</legend>
-						${ui.includeFragment("fpapp","triageDetails")}
-					</fieldset>
-				<% } %>
-				
                 <fieldset class="no-confirmation">
                     <legend>Counselling</legend>
                     ${ui.includeFragment("fpapp","counselling")}
                 </fieldset>
-				
                 <fieldset class="no-confirmation">
                     <legend>Cervical Screening</legend>
                     ${ui.includeFragment("fpapp","cancerScreening")}
                 </fieldset>
-				
                 <fieldset class="no-confirmation">
                     <legend>FP Administration</legend>
                     ${ui.includeFragment("fpapp", "familyPlanning")}
                 </fieldset>
             </section>
-			
             <div id="confirmation">
                 <span id="confirmation_label" class="title">Confirmation</span>
                 <div class="before-dataCanvas"></div>
@@ -364,13 +366,7 @@ form input[type="checkbox"], .form input[type="checkbox"] {
                 </div>
             </div>
         </form>
+
     </div>
-	
-	<div id="triage-info">
-		Triage Info Here
-	</div>
-	
-	<div id="fp-history">
-		History Here
-	</div>
+
 </div>
