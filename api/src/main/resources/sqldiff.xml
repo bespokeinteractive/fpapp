@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqldiff PUBLIC "-//OpenMRS//DTD OpenMRS SQL Diff Config 1.0//EN" "http://resources.openmrs.org/doctype/sqldiff-1.0.dtd">
+
+<sqldiff version="1.0">
+	<help>
+		USE:
+			The diffs are ordered by datamodel version number.
+			The script can be run in a top down fashion and is
+			expected to not failor overwrite old data
+
+		EXPECT:
+			- "use business-database-name;" was called prior to
+			   calling this script
+	</help>
+	
+	<diff>
+		<version>1.0.0</version>
+		<author>Dennis Henry</author>
+		<date>Oct 19th 2016</date>
+		<description>
+			Create Family Planning Tables;
+		</description>
+		<sql>
+			CREATE TABLE IF NOT EXISTS fp_methods_type (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NULL,	PRIMARY KEY (id));
+			INSERT INTO fp_methods_type (id, name) VALUES (1, 'Barrier Methods'), (2, 'Contraceptive Pills'), (3, 'Injectables'), (4, 'Insertions'), (5, 'Procedures'), (6, 'Natural Methods'), (7, 'Others');			
+			CREATE TABLE IF NOT EXISTS fp_methods (id INT NOT NULL AUTO_INCREMENT, concept_id INT NOT NULL, method_type INT NOT NULL, remarks VARCHAR(255) NULL, PRIMARY KEY (id), INDEX fk_fp_methods_type1_idx (method_type ASC), INDEX fk_fp_methods_concept1_idx (concept_id ASC), CONSTRAINT fk_fp_methods_type1 FOREIGN KEY (method_type) REFERENCES fp_methods_type (id) ON DELETE NO ACTION  ON UPDATE NO ACTION, CONSTRAINT fk_fp_methods_concept1 FOREIGN KEY (concept_id) REFERENCES concept (concept_id) ON DELETE NO ACTION  ON UPDATE NO ACTION);
+			INSERT INTO fp_methods (concept_id, method_type, remarks)
+			VALUES 
+			(  5279, 3, 'N/A'),
+			(  5278, 1, 'N/A'),
+			(  5275, 4, 'N/A'),
+			(  5276, 5, 'N/A'),
+			(   190, 1, 'N/A'),
+			(   780, 2, 'N/A'),
+			(  5277, 6, 'N/A'),
+			(159524, 6, 'N/A'),
+			(  1472, 5, 'N/A'),
+			(  1489, 5, 'N/A'),
+			(  1359, 4, 'N/A'),
+			(159837, 5, 'N/A'),
+			(160570, 2, 'N/A'),
+			(136163, 6, 'N/A'),
+			(162332, 7, 'N/A'),
+			(159589, 4, 'N/A'),
+			(159784, 2, 'N/A');
+        </sql>
+	</diff>    
+</sqldiff>

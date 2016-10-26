@@ -4,10 +4,10 @@
 		<% fpMethods.each { %>
 			fpMethods.push(${it.toJson()});
 		<% } %>
-		
+
 		jq(".fp-method").autocomplete({
 			minLength: 2,
-			focus: function( event, ui ) {
+			focus: function(event, ui ) {
 				jq( ".fp-method" ).val( ui.item.label );
 				return false;
 			},
@@ -16,16 +16,46 @@
 				event.preventDefault();
 				jq(".fp-method-value").val(ui.item.id);
 				jq("#quantity-given").attr("name", "concept." + ui.item.id);
+				
+				if (ui.item.type == 4){
+					jq('#insertion').attr('disabled', false);
+					jq('#removal').attr('disabled', false);
+					
+					jq('#removal').parent().removeClass('greyOut');					
+					jq('#insertion').parent().removeClass('greyOut');
+				}
+				else{
+					jq('#insertion').attr('disabled', true);
+					jq('#removal').attr('disabled', true);
+					
+					jq('#insertion').parent().addClass('greyOut');
+					jq('#removal').parent().addClass('greyOut');
+					
+					jq('#removal').attr('checked', false);
+					jq('#insertion').attr('checked', false);
+				}
 			}
 		}).autocomplete("instance")._renderItem = function( ul, item ) {
 			return ( "<li>" )
-				.append( "<div>" + item.label + "</div>" )
+				.append( "<div>" + item.label.toUppercase() + "</div>" )
 				.appendTo( ul );
 		};
 		
 		jq('#return-date-display').attr('name') = 'ac5c88af-3104-4ca2-b1f7-2073b1364065';
 	});
 </script>
+
+<style>
+	.simple-form-ui section{
+		background: #fff none repeat scroll 0 0;
+	}	
+	.dashboard .info-header h3 {
+		color: #f26522;
+	}
+	.greyOut{
+		color: #aaa;
+	}
+</style>
 
 
 <div style="min-width: 78%" class="col16 dashboard">

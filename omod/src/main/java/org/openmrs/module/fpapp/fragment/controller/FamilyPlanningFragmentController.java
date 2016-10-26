@@ -11,6 +11,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.fpapp.FamilyPlanningMetadata;
 import org.openmrs.module.fpapp.api.FamilyPlanningMethod;
 import org.openmrs.module.fpapp.api.FamilyPlanningService;
+import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
@@ -20,14 +21,20 @@ import org.openmrs.ui.framework.page.PageModel;
  * Created by franqq on 8/16/16.
  */
 public class FamilyPlanningFragmentController {
-    public void controller(FragmentConfiguration config, FragmentModel model, PageModel pageModel) {
+    public void controller(FragmentConfiguration config,
+                           FragmentModel model,
+                           PageModel pageModel) {
         Concept fpConcept = Context.getConceptService().getConceptByUuid(FamilyPlanningMetadata._FamilyPlanningConcept.FP_METHODS_CONCEPT);
         List<SimpleObject> fpMethods = new ArrayList<SimpleObject>();
         for (ConceptAnswer answer : fpConcept.getAnswers()) {
+            Concept concept = Context.getConceptService().getConcept(answer.getAnswerConcept().getConceptId());
+            FamilyPlanningMethods fpMethod = Context.getService(FamilyPlanningService.class).getFamilyPlanningMethodsByConcept(concept);
+
             SimpleObject method = new SimpleObject();
             method.put("label", answer.getAnswerConcept().getDisplayString());
             method.put("value", answer.getAnswerConcept().getDisplayString());
             method.put("id", answer.getAnswerConcept().getUuid());
+            method.put("type", fpMethod.getType().getId());
             fpMethods.add(method);
         }
         Patient patient = (Patient)pageModel.get("patient");

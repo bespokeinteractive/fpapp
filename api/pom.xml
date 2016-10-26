@@ -10,7 +10,7 @@
 
 	<artifactId>fpapp-api</artifactId>
 	<packaging>jar</packaging>
-	<name>Family Planning App Module Module API</name>
+	<name>FPApp Module Module API</name>
 	<description>API project for FamilyPlanningAppModule</description>
 
 	<dependencies>
