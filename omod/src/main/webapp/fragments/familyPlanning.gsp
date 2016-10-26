@@ -23,6 +23,9 @@
 					
 					jq('#removal').parent().removeClass('greyOut');					
 					jq('#insertion').parent().removeClass('greyOut');
+					
+					jq('#quantity-given').attr('disabled', false);
+					jq('#quantity-given').val('1');
 				}
 				else{
 					jq('#insertion').attr('disabled', true);
@@ -33,7 +36,17 @@
 					
 					jq('#removal').attr('checked', false);
 					jq('#insertion').attr('checked', false);
+					
+					if (ui.item.type >= 5){
+						jq('#quantity-given').attr('disabled', true);
+						jq('#quantity-given').val('N/A');
+					} else{
+						jq('#quantity-given').attr('disabled', false);
+						jq('#quantity-given').val('');
+					}
 				}
+				
+				
 			}
 		}).autocomplete("instance")._renderItem = function( ul, item ) {
 			return ( "<li>" )

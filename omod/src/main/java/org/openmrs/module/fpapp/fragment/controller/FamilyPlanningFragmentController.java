@@ -31,8 +31,8 @@ public class FamilyPlanningFragmentController {
             FamilyPlanningMethods fpMethod = Context.getService(FamilyPlanningService.class).getFamilyPlanningMethodsByConcept(concept);
 
             SimpleObject method = new SimpleObject();
-            method.put("label", answer.getAnswerConcept().getDisplayString());
-            method.put("value", answer.getAnswerConcept().getDisplayString());
+            method.put("label", answer.getAnswerConcept().getDisplayString().toUpperCase());
+            method.put("value", answer.getAnswerConcept().getDisplayString().toUpperCase());
             method.put("id", answer.getAnswerConcept().getUuid());
             method.put("type", fpMethod.getType().getId());
             fpMethods.add(method);
