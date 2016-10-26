@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.fpapp.model">
+	<class name="FamilyPlanningMethods" table="fp_methods" batch-size="500">
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+	    <many-to-one name="concept" class="org.openmrs.Concept" column="concept_id" cascade="none"  />
+	    <many-to-one name="type" class="org.openmrs.module.fpapp.model.FamilyPlanningTypes" column="method_type" cascade="none" lazy="false" />
+		<property name="remarks" column="remarks"  />
+	</class>
+</hibernate-mapping>

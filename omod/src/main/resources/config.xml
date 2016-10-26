@@ -42,6 +42,8 @@
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
+		FamilyPlanningTypes.hbm.xml
+		FamilyPlanningMethods.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->

@@ -12,11 +12,23 @@ import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.fpapp.FamilyPlanningMetadata;
 import org.openmrs.module.fpapp.api.FamilyPlanningMethod;
 import org.openmrs.module.fpapp.api.FamilyPlanningService;
+import org.openmrs.module.fpapp.db.FamilyPlanningCommoditiesDAO;
+import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
 
-public class FamilyPlanningServiceImpl implements FamilyPlanningService {
+public class FamilyPlanningServiceImpl extends BaseOpenmrsService implements FamilyPlanningService {
+    private FamilyPlanningCommoditiesDAO dao;
+
+    public FamilyPlanningCommoditiesDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(FamilyPlanningCommoditiesDAO dao) {
+        this.dao = dao;
+    }
 
     @Override
     public Set<FamilyPlanningMethod> getPreviousMethods(Patient patient) {
@@ -57,6 +69,16 @@ public class FamilyPlanningServiceImpl implements FamilyPlanningService {
                 null, //visits
                 false); //includeVoided
         return fpEncounters.size();
+    }
+
+    @Override
+    public FamilyPlanningMethods getFamilyPlanningMethodsByConcept(Concept concept) {
+        return dao.getFamilyPlanningMethodsByConcept(concept);
+    }
+
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethods(){
+        return dao.getFamilyPlanningMethods();
     }
 
 }
