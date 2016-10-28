@@ -2,6 +2,8 @@ package org.openmrs.module.fpapp.db;
 
 import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
 import org.openmrs.Concept;
+import org.openmrs.module.fpapp.model.FamilyPlanningTypes;
+
 import java.util.List;
 
 /**
@@ -11,5 +13,9 @@ import java.util.List;
  */
 public interface FamilyPlanningCommoditiesDAO {
     FamilyPlanningMethods getFamilyPlanningMethodsByConcept(Concept concept);
+    FamilyPlanningTypes getFamilyPlanningTypesById(Integer id);
+
     List<FamilyPlanningMethods> getFamilyPlanningMethods();
+    List<FamilyPlanningMethods> getFamilyPlanningMethods(List<Concept> filterList);
+    List<FamilyPlanningMethods> getFamilyPlanningMethodsByTypes(List<FamilyPlanningTypes> typeList);
 }

@@ -25,6 +25,7 @@
 					jq('#insertion').parent().removeClass('greyOut');
 					
 					jq('#quantity-given').attr('disabled', false);
+					jq('#quantity-given').removeClass('greyOut');
 					jq('#quantity-given').val('1');
 				}
 				else{
@@ -39,22 +40,51 @@
 					
 					if (ui.item.type >= 5){
 						jq('#quantity-given').attr('disabled', true);
+						jq('#quantity-given').addClass('greyOut');
 						jq('#quantity-given').val('N/A');
 					} else{
 						jq('#quantity-given').attr('disabled', false);
+						jq('#quantity-given').removeClass('greyOut');
 						jq('#quantity-given').val('');
 					}
 				}
 				
-				
+				jq('.fp-administration input').change();				
 			}
-		}).autocomplete("instance")._renderItem = function( ul, item ) {
-			return ( "<li>" )
-				.append( "<div>" + item.label.toUppercase() + "</div>" )
-				.appendTo( ul );
-		};
+		});
 		
-		jq('#return-date-display').attr('name') = 'ac5c88af-3104-4ca2-b1f7-2073b1364065';
+		jq('#other-method').change(function(){
+			var methodType = jq('#other-method :selected').data('type');
+			if (methodType == 0 || methodType == 6){
+				jq('#other-method-quantity').attr('disabled', true);
+				jq('#other-method-quantity').addClass('greyOut');
+				jq('#other-method-quantity').val('N/A');
+			}
+			else {
+				jq('#other-method-quantity').attr('disabled', false);
+				jq('#other-method-quantity').removeClass('greyOut');
+				jq('#other-method-quantity').val('');
+			}
+		}).change();
+		
+		jq('.fp-administration input').change(function(){
+			var anyFilled = false;
+			
+			jq('.fp-administration input').each(function(index, element){
+				if (element.value !== ''){
+					anyFilled = true;
+				}
+			});
+			
+			if (anyFilled == true){
+				jq('#fp-administration-set').val('SET');
+			} else{
+				jq('#fp-administration-set').val('');
+			}
+		});
+		
+		
+		jq('#return-date-display').attr('name', 'ac5c88af-3104-4ca2-b1f7-2073b1364065');
 	});
 </script>
 
@@ -66,7 +96,7 @@
 		color: #f26522;
 	}
 	.greyOut{
-		color: #aaa;
+		color: #aaa!important;
 	}
 </style>
 
@@ -81,13 +111,17 @@
 </div>
 
 <div class="fp-administration">
-	<field>
+	<div>
 		<label for="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">FP Method</label>
 		<input type="text" class="fp-method">
 		<input type="hidden" name="concept.374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" class="fp-method-value" id="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-	</field><br/>
+	</div>
 	
-	<field class="ft-type">
+	<field style="display: none;">
+		<input id="fp-administration-set" type="hidden" />
+	</field>
+	
+	<div class="ft-type">
 		<label>FP Type</label>
 		<label style="padding-left: 0px; margin-top: 0px; cursor: pointer;">
 			<input id="insertion" data-value="Insertion" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="66a52b2a-9323-4d39-a3e2-be9906f2d9cf" style="margin: 4px 5px 0 0" />
@@ -105,24 +139,39 @@
 			<input id="followup" data-value="Follow-up" type="radio" name="concept.be53c0fd-e7c4-40d1-9933-175484b6ac09" value="159489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" style="margin: 4px 5px 0 0" />
 			Follow-up
 		</label>
-	</field><br/>
+	</div>
 	
-	<field>
+	<div>
 		<label for="quantity-given">Quantity Issued</label>
 		<input type="text" name="concept.074c20bc-e18d-42f7-b501-a0bb549394c6" id="quantity-given">
-	</field><br/>
+	</div>
 	
-	<field>
+	<div style="margin-top: 30px; border-top: 2px solid #ddd;">
+		<label for="other-method">Other Method</label>
+		<select id="other-method" name="concept.1767f404-6098-4e40-9ffc-6f8d9f3eec70">
+			<option value="" data-type="0">SELECT OPTION</option>
+			<% secondaryMethods.each { %>
+				<option value="${it.concept.uuid}" data-type="${it.type.id}">${it.concept.name.toString().toUpperCase()}</option>				
+			<% } %>			
+		</select>	
+	</div>
+	
+	<div>
+		<label for="other-method-quantity">Quantity</label>
+		<input type="text" name="concept.bcc9d139-45dc-4285-b926-ae10d4b221bd" id="other-method-quantity">
+	</div>
+	
+	<div style="margin-top: 30px; border-top: 2px solid #ddd;">
 		${ui.includeFragment("uicommons", "field/datetimepicker", [id: 'fp-date', label: 'Date Given', formFieldName: 'obsDatetime', useTime: false, defaultToday: true, endToday: true])}
-	</field><br/>
+	</div>
 	
-	<field>
+	<div>
 		${ui.includeFragment("uicommons", "field/datetimepicker", [id: 'return-date', label: 'Return Date', formFieldName: 'concept.ac5c88af-3104-4ca2-b1f7-2073b1364065', useTime: false, defaultToday: true, startDate: new Date()])}
-	</field><br/>
+	</div>
 	
-	<field>
+	<div>
 		<label>Comment</label>
 		<textarea name="comment.374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rows="4" cols="50"></textarea>
-	</field>
+	</div>
 </div>
 

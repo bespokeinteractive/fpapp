@@ -12,6 +12,8 @@ import org.openmrs.module.fpapp.FamilyPlanningMetadata;
 import org.openmrs.module.fpapp.api.FamilyPlanningMethod;
 import org.openmrs.module.fpapp.api.FamilyPlanningService;
 import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
+import org.openmrs.module.fpapp.model.FamilyPlanningType;
+import org.openmrs.module.fpapp.model.FamilyPlanningTypes;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
@@ -21,6 +23,8 @@ import org.openmrs.ui.framework.page.PageModel;
  * Created by franqq on 8/16/16.
  */
 public class FamilyPlanningFragmentController {
+    FamilyPlanningService fpService = Context.getService(FamilyPlanningService.class);
+
     public void controller(FragmentConfiguration config,
                            FragmentModel model,
                            PageModel pageModel) {
@@ -41,5 +45,16 @@ public class FamilyPlanningFragmentController {
         Set<FamilyPlanningMethod> administeredMethods = Context.getService(FamilyPlanningService.class).getPreviousMethods(patient);
         model.addAttribute("fpMethods", fpMethods);
         model.addAttribute("administeredMethods", administeredMethods);
+
+        List<FamilyPlanningTypes> fpTypes = new ArrayList<FamilyPlanningTypes>();
+        fpTypes.add(fpService.getFamilyPlanningTypesById(FamilyPlanningType.BARRIER_METHODS.getValue()));
+        fpTypes.add(fpService.getFamilyPlanningTypesById(FamilyPlanningType.CONTRACEPTIVES.getValue()));
+        fpTypes.add(fpService.getFamilyPlanningTypesById(FamilyPlanningType.INJECTABLES.getValue()));
+        fpTypes.add(fpService.getFamilyPlanningTypesById(FamilyPlanningType.NATURAL_METHODS.getValue()));
+
+        List<FamilyPlanningMethods> secondaryMethods = fpService.getFamilyPlanningMethodsByTypes(fpTypes);
+        model.addAttribute("secondaryMethods", secondaryMethods);
+        model.addAttribute("fptabIncludedInPNC", Context.getAdministrationService().getGlobalProperty("fptab.includedInPNC"));
+
     }
 }

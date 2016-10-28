@@ -12,12 +12,12 @@
         <div class="testbox">
             <div>Screening Done?</div>
             <label>
-                <input type="radio"  name="concept.a9452df7-b81c-43b2-9b2d-56ea74a828b0" value="4536f271-5430-4345-b5f7-37ca4cfe1553" data-value="YES">
+                <input type="radio" name="concept.1ee04eb3-07c6-446c-b055-09f1781270c1" value="4536f271-5430-4345-b5f7-37ca4cfe1553" data-value="YES">
                 Yes
             </label><br/>
 
             <label>
-                <input type="radio" name="concept.a9452df7-b81c-43b2-9b2d-56ea74a828b0" value="606720bb-4a7a-4c4c-b3b5-9a8e910758c9" data-value="No">
+                <input type="radio" name="concept.1ee04eb3-07c6-446c-b055-09f1781270c1" value="606720bb-4a7a-4c4c-b3b5-9a8e910758c9" data-value="No">
                 No
             </label><br/>
         </div>  

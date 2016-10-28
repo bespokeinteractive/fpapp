@@ -19,7 +19,7 @@
         jq(".fp-tabs").tabs();
         NavigatorController = new KeyboardController(jq('#familyPlanningForm'));
 		
-		jq('.screening-info input[name="concept.a9452df7-b81c-43b2-9b2d-56ea74a828b0"]').change(function(){
+		jq('.screening-info input[name="concept.1ee04eb3-07c6-446c-b055-09f1781270c1"]').change(function(){
 			if (jq(this).val() == "4536f271-5430-4345-b5f7-37ca4cfe1553"){
 				jq(".screening-test").animate({
 					width: '32%'
@@ -91,7 +91,7 @@
 				}
 				
 				if (jq('.screening-result input:checked').length > 0){
-					output += 'Screening results: ' + jq('.screening-result input:checked').data('value') + '<br/>';
+					output += 'Screening results ' + jq('.screening-result input:checked').data('value') + '<br/>';
 				}
 				
 				if (output == ''){
@@ -115,14 +115,18 @@
 			
 			if (jq('#quantity-given').val() != ''){
 				output += 'Quantity: ' + jq('#quantity-given').val() + '<br/>';
-			}			
+			}
 			
 			if (output == ''){
-				output += 'N/A';
+				output = 'N/A';
 			}
 			
 			jq('#summaryTable tr:eq(3) td:eq(1)').html(output);
 		});
+		
+		jq('#return-date-display').change(function(){
+			jq('#summaryTable tr:eq(4) td:eq(1)').text(jq(this).val());
+		}).change();
     });
 </script>
 
@@ -353,7 +357,8 @@
 		position: relative;
 	}
 	.fp-administration input[type="text"],
-	.fp-administration textarea{
+	.fp-administration textarea,
+	.fp-administration select{
 		width: 74%;
 		resize: none;
 	}
@@ -510,6 +515,11 @@
 									
 									<tr>
 										<td><span class="status active"></span>Administration</td>
+										<td>N/A</td>
+									</tr>
+									
+									<tr>
+										<td><span class="status active"></span>Return Date</td>
 										<td>N/A</td>
 									</tr>
 								</tbody>

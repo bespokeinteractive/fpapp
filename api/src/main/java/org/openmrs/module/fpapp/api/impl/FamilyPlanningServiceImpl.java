@@ -18,6 +18,7 @@ import org.openmrs.module.fpapp.api.FamilyPlanningMethod;
 import org.openmrs.module.fpapp.api.FamilyPlanningService;
 import org.openmrs.module.fpapp.db.FamilyPlanningCommoditiesDAO;
 import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
+import org.openmrs.module.fpapp.model.FamilyPlanningTypes;
 
 public class FamilyPlanningServiceImpl extends BaseOpenmrsService implements FamilyPlanningService {
     private FamilyPlanningCommoditiesDAO dao;
@@ -77,8 +78,22 @@ public class FamilyPlanningServiceImpl extends BaseOpenmrsService implements Fam
     }
 
     @Override
+    public FamilyPlanningTypes getFamilyPlanningTypesById(Integer id) {
+        return dao.getFamilyPlanningTypesById(id);
+    }
+
+    @Override
     public List<FamilyPlanningMethods> getFamilyPlanningMethods(){
         return dao.getFamilyPlanningMethods();
     }
 
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethods(List<Concept> conceptList){
+        return dao.getFamilyPlanningMethods(conceptList);
+    }
+
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethodsByTypes(List<FamilyPlanningTypes> typeList){
+        return dao.getFamilyPlanningMethodsByTypes(typeList);
+    }
 }

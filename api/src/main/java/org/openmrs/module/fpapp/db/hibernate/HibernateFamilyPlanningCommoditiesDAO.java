@@ -7,11 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Concept;
-import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.fpapp.db.FamilyPlanningCommoditiesDAO;
 import org.openmrs.module.fpapp.model.FamilyPlanningMethods;
-
+import org.openmrs.module.fpapp.model.FamilyPlanningTypes;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -55,8 +54,31 @@ public class HibernateFamilyPlanningCommoditiesDAO implements FamilyPlanningComm
     }
 
     @Override
-    public List<FamilyPlanningMethods>  getFamilyPlanningMethods() {
+    public FamilyPlanningTypes getFamilyPlanningTypesById(Integer id) {
+        Criteria criteria = getSession().createCriteria(FamilyPlanningTypes.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (FamilyPlanningTypes) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethods() {
         Criteria criteria = getSession().createCriteria(FamilyPlanningMethods.class);
+        List list = criteria.list();
+        return list;
+    }
+
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethods(List<Concept> conceptList) {
+        Criteria criteria = getSession().createCriteria(FamilyPlanningMethods.class);
+        criteria.add(Restrictions.in("concept", conceptList));
+        List list = criteria.list();
+        return list;
+    }
+
+    @Override
+    public List<FamilyPlanningMethods> getFamilyPlanningMethodsByTypes(List<FamilyPlanningTypes> typeList) {
+        Criteria criteria = getSession().createCriteria(FamilyPlanningMethods.class);
+        criteria.add(Restrictions.in("type", typeList));
         List list = criteria.list();
         return list;
     }
