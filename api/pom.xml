@@ -7,8 +7,12 @@
 		<version>1.0</version>
 	</parent>
 
+<<<<<<< HEAD
 	<artifactId>fpapp-api</artifactId>&#xD;
 	<version>1.0</version>
+=======
+	<artifactId>fpapp-api</artifactId>
+>>>>>>> refs/heads/master
 	<packaging>jar</packaging>
 	<name>FPApp Module Module API</name>
 	<description>API project for FamilyPlanningAppModule</description>
