@@ -7,12 +7,8 @@
 		<version>1.0</version>
 	</parent>
 
-<<<<<<< HEAD
-	<artifactId>fpapp-omod</artifactId>&#xD;
-	<version>1.0</version>
-=======
 	<artifactId>fpapp-omod</artifactId>
->>>>>>> refs/heads/master
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>FPApp Module Module OMOD</name>
 	<description>OMOD project for FamilyPlanningAppModule</description>
