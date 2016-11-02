@@ -57,16 +57,18 @@
 				<version>3.3.1</version>
 				<scope>provided</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>hospitalcore-api</artifactId>
-				<version>1.6.1-SNAPSHOT</version>
+				<version>1.6.1</version>
 				<scope>provided</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>hospitalcore-api</artifactId>
-				<version>1.6.1-SNAPSHOT</version>
+				<artifactId>hospitalcore-omod</artifactId>
+				<version>1.6.1</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -87,14 +89,14 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>mchapp-api</artifactId>
-				<version>1.0.3-SNAPSHOT</version>
+				<version>1.0.3</version>
 				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>mchapp-omod</artifactId>
-				<version>1.0.3-SNAPSHOT</version>
+				<version>1.0.3</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -170,15 +172,29 @@
 						<source>1.6</source>
 					</configuration>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.openmrs.maven.plugins</groupId>
 					<artifactId>maven-openmrs-plugin</artifactId>
 					<version>1.0.1</version>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>external.atlassian.jgitflow</groupId>
+					<artifactId>jgitflow-maven-plugin</artifactId>
+					<version>1.0-m5</version>
+					<configuration>
+						<noDeploy>true</noDeploy>
+						<flowInitContext>
+							<developBranchName>qa</developBranchName>
+						</flowInitContext>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
